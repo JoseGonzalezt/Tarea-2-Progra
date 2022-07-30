@@ -1,0 +1,102 @@
+---
+title: "Tarea 2_FUNCIONES EN R y Familia apply_Jose Gonzalez_999009084"
+output: html_notebook
+---
+
+Funciones en R:
+Una función es un conjunto de instrucciones que convierte entradas a resultados deseados. 
+
+1.	Estructura de una función:
+Consta de tres partes, entrada, cuerpo y salida.
+
+Entrada: es el ingreso de la información que es requerida para que se realice algún procedimiento dentro de la función. Estos valores de entrada pueden ser ingresados por el usuario y si no se tiene este ingreso tomar valores por defecto.
+
+Cuerpo: en el se encuentran las instrucciones que transforman las entradas en la salida deseada o requerida, las instrucciones que se incluyen al cuerpo de la función deben ir entre {  }.
+
+Salidas: son los resultados obtenidos de la transformación de los valores de entrada que se realizan en el cuerpo. 
+
+2.	Ejemplo de función:
+```{r}
+sumar <- function(x,y){
+  total <- x + y
+  return(total)
+}
+```
+
+```{r}
+rapidez <- function(s,t){
+  resultado <- s/t
+  return(resultado)
+}
+```
+
+3.	Argumentos de una función:
+
+Son una serie de valores (opcionales) que se pasan a la función, de manera que que ciertas variables dentro de estas poseen diferentes valores en cada llamada de la función, en este caso se asignan a las variables en el orden que se colocan, por ejemplo, al llamar la función con los valores 7, 3 sin indicar quien es quien, el 7 se asigna a lado1 y el 3 a lado2.
+
+```{r}
+area_rectangulo <- function(lado1, lado2){
+  area <- lado1 * lado2
+  return(area)
+}
+area_rectangulo(7,3)
+```
+
+4.	Argumentos por valor:
+
+Es el método mas recomendado, porque se indica a la función el valor y a que variable debe ser asignado, es útil cuando se tienen muchas variables para la función y así evitar que una no sea asignada correctamente y nos de un error. Ejemplo, utilizando el ejercicio anterior se indican y asignan los valores a las variables lado1 y lado2.
+
+```{r}
+area_rectangulo <- function(lado1, lado2){
+  area <- lado1 * lado2
+  return(area)
+}
+area_rectangulo(lado1=7,lado2=3)
+```
+
+
+Familia apply
+
+Son funciones utilizadas para aplicar una función a cada elemento de una estructura de datos, se utilizan para aplicar funciones en matrices, data frame, arrays y listas.
+
+1.	Lapply: diseñada para aplicar funciones a todos los elementos de una lista. 
+Sintaxis: lapply (X, FUN), donde X es una lista y FUN la función a aplicar. Recibe una lista y devuelve una lista
+
+2.	Uso de lapply con funciones (ejemplos)
+
+```{r}
+lista <- list(A=c(8,9,7,5),
+              B=data.frame(x=1:5, y=c(5,1,0,2,3)))
+lapply (lista, sum)
+```
+
+```{r}
+lista2 <- list(A=c(56,12,57,24), B=c(89, 12, 64,18,65,76))
+lapply (lista2, 
+        quantile,
+        probs = c(0.25,0.50,0.75))
+```
+
+3.	Sapply: permite iterar sobre una lista o vector sin tener necesidad de utilizar un bucle for.
+Sintaxis: sapply (X, FUN, simplify, USE.NAMES) donde X es un vector o lista, FUN la función a ser aplicada, simplify si es False devuelve lista, True array, USE.NAMES si True y si x es un vector usa los nombres de X.
+
+4.	Uso de sapply con funciones (ejemplos)
+
+```{r}
+lista3 <- list (A=c(4,9, 16, 25))
+sapply (lista3, sqrt)
+```
+
+5.	Vapply: es similar a sapply, pero esta necesita especificar el tipo de salida explícitamente.
+
+6.	Uso de vapply con funciones (ejemplos)
+
+```{r}
+lista4 <- list(A=1, B=1:3, C=1:7)
+vapply(lista4, FUN = length, FUN.VALUE = 0L)
+```
+
+José Alfredo Gonzalez Tupas 
+Carnet: 999009084
+
+
